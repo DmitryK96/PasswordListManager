@@ -1,0 +1,38 @@
+﻿<Window x:Class="PasswordListManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Password Manager" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Список пользователей -->
+        <GroupBox Header="Пользователи" Grid.Column="0" Margin="5">
+            <DataGrid x:Name="UsersDataGrid"
+                      ItemsSource="{Binding Users}"
+                      SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Username}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <!-- Пароли выбранного пользователя -->
+        <GroupBox Header="Пароли" Grid.Column="1" Margin="5">
+            <DataGrid x:Name="PasswordsDataGrid"
+                      ItemsSource="{Binding SelectedUser.Passwords}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назначение" Binding="{Binding Purpose}" Width="*"/>
+                    <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
+                    <DataGridTextColumn Header="Пароль" Binding="{Binding Password}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</Window>
