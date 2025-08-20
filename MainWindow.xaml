@@ -10,29 +10,42 @@
 
         <!-- Список пользователей -->
         <GroupBox Header="Пользователи" Grid.Column="0" Margin="5">
-            <DataGrid x:Name="UsersDataGrid"
-                      ItemsSource="{Binding Users}"
-                      SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Username}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,5">
+                    <Button Content="Добавить пользователя" Click="AddUser_Click" Margin="0,0,5,0"/>
+                    <Button Content="Удалить пользователя" Click="DeleteUser_Click"/>
+                </StackPanel>
+
+                <DataGrid x:Name="UsersDataGrid"
+          ItemsSource="{Binding Users}"
+          SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+          AutoGenerateColumns="False"
+          IsReadOnly="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
         </GroupBox>
 
         <!-- Пароли выбранного пользователя -->
         <GroupBox Header="Пароли" Grid.Column="1" Margin="5">
-            <DataGrid x:Name="PasswordsDataGrid"
-                      ItemsSource="{Binding SelectedUser.Passwords}"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Назначение" Binding="{Binding Purpose}" Width="*"/>
-                    <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
-                    <DataGridTextColumn Header="Пароль" Binding="{Binding Password}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <DockPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,5">
+                    <Button Content="Добавить пароль" Click="AddPassword_Click" Margin="0,0,5,0" />
+                    <Button Content="Удалить пароль" Click="DeletePassword_Click" />
+                </StackPanel>
+                <DataGrid x:Name="PasswordsDataGrid"
+                  ItemsSource="{Binding SelectedUser.Passwords}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Назначение" Binding="{Binding Purpose, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                        <DataGridTextColumn Header="Логин" Binding="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                        <DataGridTextColumn Header="Пароль" Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
         </GroupBox>
     </Grid>
 </Window>
